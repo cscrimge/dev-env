@@ -1,0 +1,55 @@
+[core]
+    whitespace = tab-in-indent
+    pager = less -+$LESS -FRX
+	autocrlf = false
+    compression = 9
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+
+[log]
+    date = local
+
+[push]
+    default = current
+
+[merge]
+    tool = meld
+    conflictstyle = diff3
+
+[mergetool]
+    prompt = false
+#    cmd = $LOCAL $MERGED $REMOTE
+
+[difftool]
+    prompt = false
+
+[user]
+    name = Chris Scrimgeour
+    email = chris.scrimgeour@safe.com
+
+[alias]
+    lg = log --color --decorate --abbrev-commit --graph
+    purge = clean -d -x -e scons.cfg
+    pick = cherry-pick
+    st = status
+    ff = merge --ff-only
+    dt = difftool -d
+    up = update
+
+[credential]
+	helper = cache --timeout=3600
+[init]
+	templatedir = /code/git/git-scripts/template
+[filter "fat"]
+	clean = git-fat filter-clean
+	smudge = git-fat filter-smudge
+	cfgpath = /code/git/git-scripts/fat-config
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+[lfs]
+	fetchexclude = *.dll,*.lib,*.pdb,*.exe
