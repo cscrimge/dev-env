@@ -116,8 +116,6 @@ if [ -d $HOME/bin ]; then
 fi
 
 PATH=$PATH:/code/git/git-scripts/bin
-LD_LIBRARY_PATH=/usr/local/Qt-5.2.1/lib
-LIBRARY_PATH=/usr/local/Qt-5.2.1/lib
 
 export PATH LD_LIBRARY_PATH LIBRARY_PATH
 
@@ -125,57 +123,52 @@ export EDITOR=vim
 
 export CDPATH=.:$HOME
 
-export FME_PARENT=/code/git/fme
+export CODE_PARENT=/code/git/fme
 
 function choosefme {
-    if [ ! -n "$FME_PARENT" ]; then
-       echo "\$FME_PARENT is not set."
+    if [ ! -n "$CODE_PARENT" ]; then
+       echo "\$CODE_PARENT is not set."
        return 1
     fi
-    if [ ! -d $FME_PARENT ]; then
-       echo "$FME_PARENT is not a directory"
-       return 1
-    fi
-
-    if [ ! -d $FME_PARENT/$1 ]; then
-       echo "$1 was not found in $FME_PARENT"
+    if [ ! -d $CODE_PARENT ]; then
+       echo "$CODE_PARENT is not a directory"
        return 1
     fi
 
-    setfme $FME_PARENT/$1 && cd $FME_ROOT
+    if [ ! -d $CODE_PARENT/$1 ]; then
+       echo "$1 was not found in $CODE_PARENT"
+       return 1
+    fi
+
+    setfme $CODE_PARENT/$1 && cd $FME_ROOT
 }
 
 function setfme {
 
     unset CDPATH
-    unset FME_HOME
+    unset CODE_HOME
 
-    if [ ! -z $FME_ROOT ]; then
-	    LD_LIBRARY_PATH=${LD_LIBRARY_PATH/:$FME_ROOT\/install\/fmecore/}
-	    PATH=${PATH/:$FME_ROOT\/install/}
-        PYTHONPATH=${PYTHONPATH/:$FME_ROOT\/foundation\/formats/}
-        PYTHONPATH=${PYTHONPATH/:$FME_ROOT\/foundation\/util\/python/}
+    if [ ! -z $CODE_ROOT ]; then
+	    PATH=${PATH/:$CODE_ROOT\/install/}
     fi
 
-    FME_ROOT=`cd $1; pwd`
+    CODE_ROOT=`cd $1; pwd`
 
-    while [ ! -d "$FME_ROOT/install/fmecore" ] && [ "$FME_ROOT" != "/" ]; do
-        FME_ROOT=`cd "$FME_ROOT/.."; pwd`
+    while [ ! -d "$CODE_ROOT/install/fmecore" ] && [ "$CODE_ROOT" != "/" ]; do
+        CODE_ROOT=`cd "$CODE_ROOT/.."; pwd`
     done
 
-    if [ ! -d "$FME_ROOT/install/fmecore" ]; then
-        echo "$1 is not a subdirectory of an FME_ROOT"
+    if [ ! -d "$CODE_ROOT/install/fmecore" ]; then
+        echo "$1 is not a subdirectory of an CODE_ROOT"
         return 1
     fi
 
-    echo "New FME_ROOT is $FME_ROOT"
+    echo "New CODE_ROOT is $CODE_ROOT"
 
-    CDPATH=.:$HOME:$FME_ROOT
+    CDPATH=.:$HOME:$CODE_ROOT
 
-    export FME_HOME=$FME_ROOT/install
-    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$FME_HOME/fmecore
-    export PATH=$PATH:$FME_HOME
-    export PYTHONPATH=$PYTHONPATH:$FME_ROOT/foundation/formats:$FME_ROOT/foundation/util/python
+    export CODE_HOME=$CODE_ROOT/install
+    export PATH=$PATH:$CODE_HOME
     return 0
 }
 
