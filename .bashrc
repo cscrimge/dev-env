@@ -39,7 +39,7 @@ source ~/.git_parse.sh
 
 git_status=$(parse_git_branch)
 
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;37m\]\h\[\033[00m\]:${git_status}\[\033[01;34m\]\w\[\033[00m\]\n[\[\033[01;35m\]\t\[\033[00m\]]$ '
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;37m\]\h\[\033[00m\]:$(parse_git_branch)\[\033[01;34m\]\w\[\033[00m\]\n[\[\033[01;35m\]\t\[\033[00m\]]$ '
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
