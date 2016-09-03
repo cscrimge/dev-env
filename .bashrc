@@ -56,8 +56,11 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+source ~/.git_parse.sh
+
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;37m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\n[\[\033[01;35m\]\t\[\033[00m\]]$ '
+   git_status=`parse_git_branch`
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;37m\]\h\[\033[00m\]:${git_status}\[\033[01;34m\]\w\[\033[00m\]\n[\[\033[01;35m\]\t\[\033[00m\]]$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
