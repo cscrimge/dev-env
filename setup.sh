@@ -13,10 +13,10 @@ function symlink
        if [ "$src" == "$dest_ref" ]; then
           echo "$dest is already symlinked"
           return
-          if [ ! -f $dest ]; then
-             echo "Removing broken symlink: $dest"
-             rm -f $dest
-          fi
+       fi
+       if [ ! -e $dest ]; then
+          echo "Removing broken symlink: $dest"
+          rm -f $dest
        fi
     fi
     if [ -e $dest ]; then
@@ -26,9 +26,10 @@ function symlink
     ln -s $src $dest
 }
 
-symlink $mydir/.bashrc ~/.bashrc ~/bashrc.orig
-symlink $mydir/.gitconfig ~/.gitconfig ~/gitconfig.orig
-symlink $mydir/.emacs ~/.emacs ~/emacs.orig
+symlink $mydir/bashrc ~/.bashrc ~/bashrc.orig
+symlink $mydir/gitconfig ~/.gitconfig ~/gitconfig.orig
+symlink $mydir/emacs ~/.emacs ~/emacs.orig
+symlink $mydir/emacs.d/custom-modes ~/.emacs.d/custom-modes ~/emacs.d/custom-modes.orig
 
 unset mydir
 unset -f symlink

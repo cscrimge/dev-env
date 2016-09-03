@@ -37,7 +37,7 @@ fi
 
 CONFIG_DIR=$(cd $(dirname $(readlink -f ${BASH_SOURCE[0]})) && pwd)
 
-source $CONFIG_DIR/.git_parse.sh
+source $CONFIG_DIR/git_parse.sh
 
 git_status=$(parse_git_branch)
 
@@ -65,8 +65,8 @@ alias l='ls -CF'
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f $CONFIG_DIR/.bash_aliases ]; then
-   source $CONFIG_DIR/.bash_aliases
+if [ -f $CONFIG_DIR/bash_aliases ]; then
+   source $CONFIG_DIR/bash_aliases
 fi
 if [ -f ~/.bash_aliases ]; then
    source ~/.bash_aliases
