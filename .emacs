@@ -4,7 +4,7 @@
 (global-set-key (kbd "C-/") 'comment-region)
 (global-set-key (kbd "C-?") 'uncomment-region)
 
-(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path (getenv "CONFIG_DIR")"/.emacs.d/")
 (require 'jam-mode)
 (require 'yaml-mode)
 (require 'qt-pro)

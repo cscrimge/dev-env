@@ -35,7 +35,9 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-source ~/.git_parse.sh
+CONFIG_DIR=$(cd $(dirname $(readlink -f ${BASH_SOURCE[0]})) && pwd)
+
+source $CONFIG_DIR/.git_parse.sh
 
 git_status=$(parse_git_branch)
 
@@ -63,8 +65,11 @@ alias l='ls -CF'
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
+if [ -f $CONFIG_DIR/.bash_aliases ]; then
+   source $CONFIG_DIR/.bash_aliases
+fi
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+   source ~/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
