@@ -143,7 +143,7 @@ function choosefme {
        return 1
     fi
 
-    setfme $CODE_PARENT/$1 && cd $FME_ROOT
+    setfme $CODE_PARENT/$1 && cd $CODE_PARENT/$1
 }
 
 function setfme {
@@ -155,14 +155,10 @@ function setfme {
 	    PATH=${PATH/:$CODE_ROOT\/install/}
     fi
 
-    CODE_ROOT=`cd $1; pwd`
+    CODE_ROOT=$(git -C $1 rev-parse --show-toplevel 2>/dev/null)
 
-    while [ ! -d "$CODE_ROOT/install/fmecore" ] && [ "$CODE_ROOT" != "/" ]; do
-        CODE_ROOT=`cd "$CODE_ROOT/.."; pwd`
-    done
-
-    if [ ! -d "$CODE_ROOT/install/fmecore" ]; then
-        echo "$1 is not a subdirectory of an CODE_ROOT"
+    if [ ! -n "$CODE_ROOT" ]; then
+        echo "$1 is not in a git respository"
         return 1
     fi
 
