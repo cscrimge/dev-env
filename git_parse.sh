@@ -1,46 +1,130 @@
+#!/bin/bash
+
+##################################################################
+function fg
+{
+    echo -en "$(tput setaf $1)$2$(tput sgr 0)"
+}
+
+##################################################################
 # get current branch in git repo
 function parse_git_branch() {
-	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-	if [ ! "${BRANCH}" == "" ]
+	local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+	if [ ! "${branch}" == "" ]
 	then
-		STAT=`parse_git_dirty`
-		echo "(${BRANCH}${STAT})"
+       branch=$(fg 120 ${branch})
+
+       local prefix=$(fg 136 "(")
+       local suffix=$(fg 136 ")")
+
+	   local stat=$(parse_git_status)
+
+       if [ -n "${stat}" ]; then
+          stat=${branch}$(fg 136 "|")$stat
+       else
+		   stat=${branch}
+       fi
+
+       echo -n "${prefix}${stat}${suffix}"
 	else
-		echo ""
+		echo -n ""
 	fi
 }
 
+##################################################################
 # get current status of git repo
-function parse_git_dirty {
-	status=`git status 2>&1 | tee`
-	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
-	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
-	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
-	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
-	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
-	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
-	bits=''
-	if [ "${renamed}" == "0" ]; then
-		bits=">${bits}"
-	fi
-	if [ "${ahead}" == "0" ]; then
-		bits="*${bits}"
-	fi
-	if [ "${newfile}" == "0" ]; then
-		bits="+${bits}"
-	fi
-	if [ "${untracked}" == "0" ]; then
-		bits="?${bits}"
-	fi
-	if [ "${deleted}" == "0" ]; then
-		bits="x${bits}"
-	fi
-	if [ "${dirty}" == "0" ]; then
-		bits="!${bits}"
-	fi
-	if [ ! "${bits}" == "" ]; then
-		echo " ${bits}"
-	else
-		echo ""
-	fi
+function parse_git_status {
+
+    local modified=0
+    local staged=0
+    local added=0
+    local renamed=0
+    local deleted=0
+    local untracked=0
+    local ahead=0
+    local behind=0
+
+	local status=$(git status --porcelain -b 2>/dev/null)
+    IFS=$'\n'
+    for line in ${status}; do
+        local st=${line:0:2}
+        local line=${line:3}
+
+        case $st in
+            "##")
+                ahead=$(echo $line | grep -o "\[ahead .*\]" | grep -oP "\d+")
+                behind=$(echo $line | grep -o "\[behind .*\]" | grep -oP "\d+")
+
+                if [ -z "$ahead" ]; then
+                   ahead=0
+                fi
+                if [ -z "$behind" ]; then
+                   behind=0
+                fi
+                ;;
+            "AM")
+                ((modified++))
+                ((added++))
+                ;;
+            "MM")
+                ((modified++))
+                ((staged++))
+                ;;
+            " M")
+                ((modified++))
+                ;;
+            "M ")
+                ((staged++))
+                ;;
+            "A ")
+                ((added++))
+                ;;
+            "R ")
+                ((renamed++))
+                ;;
+            " D")
+                ((deleted++))
+                ;;
+            "D ")
+                ((deleted++))
+                ;;
+            "??")
+                ((untracked++))
+                ;;
+        esac
+    done
+    unset IFS
+
+    local dirty_bits=""
+
+    if [ ${modified} -gt 0 ]; then
+       dirty_bits=${dirty_bits}$(fg 207 "≢ ${modified}")
+    fi
+    if [ ${staged} -gt 0 ]; then
+       dirty_bits=${dirty_bits}$(fg 39 "● ${staged}")
+    fi
+    if [ ${added} -gt 0 ]; then
+       dirty_bits=${dirty_bits}$(fg 76 "✚ ${added}")
+    fi
+    if [ ${renamed} -gt 0 ]; then
+       dirty_bits=${dirty_bits}$(fg 215 "→ ${renamed}")
+    fi
+    if [ ${deleted} -gt 0 ]; then
+       dirty_bits=${dirty_bits}$(fg 160 "— ${deleted}")
+    fi
+    if [ ${untracked} -gt 0 ]; then
+       dirty_bits=${dirty_bits}$(fg 226 "⁇ ${untracked}")
+    fi
+    if [ ${ahead} -gt 0 ]; then
+       dirty_bits=${dirty_bits}$(fg 51 "↑ ${ahead}")
+    fi
+    if [ ${behind} -gt 0 ]; then
+       dirty_bits=${dirty_bits}$(fg 200 "↓ ${behind}")
+    fi
+
+    if [ -z "${dirty_bits}" ]; then
+       dirty_bits=$(fg 46 "✓")
+    fi
+
+    echo $dirty_bits
 }
