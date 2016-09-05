@@ -9,26 +9,20 @@ function fg
 ##################################################################
 # get current branch in git repo
 function parse_git_branch() {
-	local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
-	if [ ! "${branch}" == "" ]
-	then
+    local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+    if [ ! "${branch}" == "" ]
+    then
        branch=$(fg 120 ${branch})
 
        local prefix=$(fg 136 "(")
        local suffix=$(fg 136 ")")
 
-	   local stat=$(parse_git_status)
+       stat=${branch}$(fg 136 "|")$(parse_git_status)
 
-       if [ -n "${stat}" ]; then
-          stat=${branch}$(fg 136 "|")$stat
-       else
-		   stat=${branch}
-       fi
-
-       echo -n "${prefix}${stat}${suffix}"
-	else
-		echo -n ""
-	fi
+       echo -n "${prefix}${stat}${suffix} "
+    else
+        echo -n ""
+    fi
 }
 
 ##################################################################
@@ -44,7 +38,7 @@ function parse_git_status {
     local ahead=0
     local behind=0
 
-	local status=$(git status --porcelain -b 2>/dev/null)
+    local status=$(git status --porcelain -b 2>/dev/null)
     IFS=$'\n'
     for line in ${status}; do
         local st=${line:0:2}
@@ -123,7 +117,7 @@ function parse_git_status {
     fi
 
     if [ -z "${dirty_bits}" ]; then
-       dirty_bits=$(fg 46 "✓")
+       dirty_bits=$(fg 46 "✔")
     fi
 
     echo $dirty_bits

@@ -43,11 +43,16 @@ function colortab {
 }
 
 ##################################################################
-function get_time
+function cmd_status
 {
-    fg 14 $(date +%H:%M:%S)
-}
+    local cmd_state=$?
 
+    if [ "$cmd_state" == 0 ]; then
+       echo $(fg 46 "✔ ")
+    else
+       echo $(fg 9 "✗ ")
+    fi
+}
 
 ##################################################################
 function get_prompt
@@ -64,5 +69,5 @@ function get_prompt
     path=$(fg 12 $path)
     time=$(fg 14 $time)
 
-    echo "${user}@${host}: "'$(parse_git_branch)'" $path\n[$time]$ "
+    echo '$(cmd_status)'"${user}@${host}: "'$(parse_git_branch)'"$path\n[$time]$ "
 }

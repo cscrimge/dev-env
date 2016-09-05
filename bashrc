@@ -37,12 +37,10 @@ fi
 
 CONFIG_DIR=$(cd $(dirname $(readlink -f ${BASH_SOURCE[0]})) && pwd)
 source $CONFIG_DIR/bash-prompt.sh
-unset CONFIG_DIR
 
 git_status=$(parse_git_branch)
 
-PS1='\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;37m\]\h\[\033[00m\]: $(parse_git_branch) \[\033[01;34m\]\w\[\033[00m\]\n[\[\033[01;35m\]\t\[\033[00m\]]$ '
-#PS1=$(get_prompt)
+PS1='$(cmd_status)\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;37m\]\h\[\033[00m\]: $(parse_git_branch)\[\033[01;34m\]\w\[\033[00m\]\n[\[\033[01;35m\]\t\[\033[00m\]]$ '
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -144,3 +142,5 @@ function setfme {
 }
 
 setfme $PWD || setfme /code/git/fme/working
+
+unset CONFIG_DIR
