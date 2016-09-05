@@ -38,8 +38,6 @@ fi
 CONFIG_DIR=$(cd $(dirname $(readlink -f ${BASH_SOURCE[0]})) && pwd)
 source $CONFIG_DIR/bash-prompt.sh
 
-git_status=$(parse_git_branch)
-
 PS1='$(cmd_status)\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;37m\]\h\[\033[00m\]: $(parse_git_branch)\[\033[01;34m\]\w\[\033[00m\]\n[\[\033[01;35m\]\t\[\033[00m\]]$ '
 
 # enable color support of ls and also add handy aliases

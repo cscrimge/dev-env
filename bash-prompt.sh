@@ -53,21 +53,3 @@ function cmd_status
        echo $(fg 9 "✗ ")
     fi
 }
-
-##################################################################
-function get_prompt
-{
-    # Common elements
-    local user="\u"
-    local host="\h"
-    local path="\w"
-    local time="\t"
-
-    # Set up colours:
-    user=$(fg 10 $user)
-    host=$(fg 13 $host)
-    path=$(fg 12 $path)
-    time=$(fg 14 $time)
-
-    echo '$(cmd_status)'"${user}@${host}: "'$(parse_git_branch)'"$path\n[$time]$ "
-}
