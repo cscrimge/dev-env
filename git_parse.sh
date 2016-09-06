@@ -12,12 +12,12 @@ function parse_git_branch() {
     local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
     if [ ! "${branch}" == "" ]
     then
-       branch=$(fg 120 ${branch})
+       branch=$(fg 120 "${branch}")
 
        local prefix=$(fg 136 "(")
        local suffix=$(fg 136 ")")
 
-       stat=${branch}$(fg 136 "|")$(parse_git_status)
+       stat="${branch}$(fg 136 "|")$(parse_git_status)"
 
        echo -n "${prefix}${stat}${suffix} "
     else
