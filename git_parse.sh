@@ -34,6 +34,7 @@ function parse_git_status {
     local added=0
     local renamed=0
     local deleted=0
+    local conflicted=0
     local untracked=0
     local ahead=0
     local behind=0
@@ -63,6 +64,9 @@ function parse_git_status {
             "MM")
                 ((modified++))
                 ((staged++))
+                ;;
+            "UU"|"DD"|"AU"|"UD"|"UA"|"DU"|"AA")
+                ((conflicted++))
                 ;;
             " M")
                 ((modified++))
@@ -105,6 +109,9 @@ function parse_git_status {
     fi
     if [ ${deleted} -gt 0 ]; then
        dirty_bits=${dirty_bits}$(fg 160 "— ${deleted}")
+    fi
+    if [ ${conflicted} -gt 0 ]; then
+       dirty_bits=${dirty_bits}$(fg 9 "✗ ${conflicted}")
     fi
     if [ ${untracked} -gt 0 ]; then
        dirty_bits=${dirty_bits}$(fg 226 "⁇ ${untracked}")
