@@ -46,8 +46,8 @@ function parse_git_status {
 
         case $st in
             "##")
-                ahead=$(echo $line | grep -o "\[ahead .*\]" | grep -oP "\d+")
-                behind=$(echo $line | grep -o "\[behind .*\]" | grep -oP "\d+")
+                ahead=$(echo $line | grep -oP "ahead \d+" | grep -oP "\d+")
+                behind=$(echo $line | grep -oP "behind \d+" | grep -oP "\d+")
 
                 if [ -z "$ahead" ]; then
                    ahead=0
