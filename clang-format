@@ -1,20 +1,24 @@
-﻿BasedOnStyle: Mozilla
+﻿# .clang-format for v3.7.
+# v3.8 introduces a regression with Allman style and lambdas:
+# https://llvm.org/bugs/show_bug.cgi?id=27640
+BasedOnStyle: Mozilla
 AccessModifierOffset: '-3'
-AlignAfterOpenBracket: Align
+AlignAfterOpenBracket: true
 AlignConsecutiveAssignments: 'true'
-AlignConsecutiveDeclarations: 'true'
+#AlignConsecutiveDeclarations: 'true'
 AlignEscapedNewlinesLeft: 'true'
 AlignOperands: 'true'
 AlignTrailingComments: 'true'
 AllowAllParametersOfDeclarationOnNextLine: 'true'
-AllowShortBlocksOnASingleLine: 'true'
+# Switch this to true if https://llvm.org/bugs/show_bug.cgi?id=25069 is fixed
+AllowShortBlocksOnASingleLine: false
 AllowShortCaseLabelsOnASingleLine: 'true'
 AllowShortFunctionsOnASingleLine: Inline
-AllowShortIfStatementsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: true
 AllowShortLoopsOnASingleLine: 'false'
 AlwaysBreakTemplateDeclarations: 'true'
 AlwaysBreakAfterDefinitionReturnType: false
-AlwaysBreakAfterReturnType: None
+#AlwaysBreakAfterReturnType: None
 BinPackArguments: 'false'
 BinPackParameters: 'false'
 BreakBeforeBinaryOperators: NonAssignment
