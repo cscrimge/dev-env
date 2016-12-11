@@ -29,6 +29,7 @@ function symlink
 symlink $mydir/bashrc ~/.bashrc ~/bashrc.orig
 symlink $mydir/gitconfig ~/.gitconfig ~/gitconfig.orig
 symlink $mydir/emacs ~/.emacs ~/emacs.orig
+symlink $mydir/clang-format ~/.clang-format ~/clang-format.orig
 symlink $mydir/emacs.d/custom-modes ~/.emacs.d/custom-modes ~/emacs.d/custom-modes.orig
 
 unset mydir
