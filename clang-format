@@ -21,7 +21,7 @@ AlwaysBreakAfterDefinitionReturnType: false
 #AlwaysBreakAfterReturnType: None
 BinPackArguments: 'false'
 BinPackParameters: 'false'
-BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeBinaryOperators: None
 BreakBeforeBraces: Allman
 BreakConstructorInitializersBeforeComma: 'false'
 ColumnLimit: '80'
@@ -36,6 +36,12 @@ IndentWidth: '3'
 IndentWrappedFunctionNames: 'false'
 Language: Cpp
 NamespaceIndentation: None
+PenaltyBreakBeforeFirstCallParameter: 10
+PenaltyBreakComment: 10
+PenaltyBreakFirstLessLess: 10
+PenaltyBreakString: 10
+PenaltyExcessCharacter: 2
+PenaltyReturnTypeOnItsOwnLine: 20
 PointerAlignment: Left
 SpaceAfterCStyleCast: 'false'
 SpaceBeforeAssignmentOperators: 'true'
