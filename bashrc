@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
-      *) return;;
+    *) return;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -84,6 +84,9 @@ fi
 
 if [ -d $HOME/bin ]; then
     PATH=$HOME/bin:$PATH; export PATH
+fi
+if [ -d $HOME/.local/bin ]; then
+    PATH=$HOME/.local/bin:$PATH; export PATH
 fi
 
 PATH=$PATH:/code/git/git-scripts/bin

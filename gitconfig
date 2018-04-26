@@ -1,7 +1,7 @@
 [core]
     whitespace = tab-in-indent
     pager = less -+$LESS -FRX
-	autocrlf = false
+	autocrlf = input
     compression = 9
 
 [color]
@@ -17,11 +17,10 @@
 
 [merge]
     tool = meld
-    conflictstyle = diff3
+    conflictstyle = merge
 
 [mergetool]
     prompt = false
-#    cmd = $LOCAL $MERGED $REMOTE
 
 [difftool]
     prompt = false
@@ -38,18 +37,22 @@
     ff = merge --ff-only
     dt = difftool -d
     up = update
+    pu = push -u
 
 [credential]
 	helper = cache --timeout=3600
 [init]
 	templatedir = /code/git/git-scripts/template
-[filter "fat"]
-	clean = git-fat filter-clean
-	smudge = git-fat filter-smudge
-	cfgpath = /code/git/git-scripts/fat-config
+#[filter "fat"]
+#	clean = git-fat filter-clean
+#	smudge = git-fat filter-smudge
+#	cfgpath = /code/git/git-scripts/fat-config
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
 	required = true
 [lfs]
-	fetchexclude = *.dll,*.lib,*.pdb,*.exe
+	#fetchexclude = *.pdb,*.dll,*.lib,*.exe,*.msm,PLATFORM-macosx/*
+[rebase]
+	autoSquash = true
