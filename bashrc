@@ -97,7 +97,7 @@ export EDITOR=vim
 
 export CDPATH=.:$HOME
 
-export CODE_PARENT=/code/git/fme
+export CODE_PARENT=$HOME/code/git/fme
 
 function choosefme {
     if [ ! -n "$CODE_PARENT" ]; then
@@ -142,6 +142,6 @@ function setfme {
     return 0
 }
 
-setfme $PWD || setfme /code/git/fme/working
+setfme $PWD || setfme $CODE_PARENT/working
 
 unset CONFIG_DIR
