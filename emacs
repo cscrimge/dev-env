@@ -9,12 +9,6 @@
 (require 'yaml-mode)
 (require 'qt-pro)
 
-(load "/usr/share/emacs/site-lisp/clang-format-3.7/clang-format.el")
-;; (global-set-key [tab] 'clang-format-region)
-(eval-after-load 'c++-mode
-   '(define-key clang-format [(tab)] 'clang-format-region))
-
-
 (setq frame-title-format "%b %*%*")
 (setq auto-mode-alist
       (append '(
