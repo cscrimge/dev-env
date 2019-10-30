@@ -139,6 +139,7 @@ function setfme {
 
     export CODE_HOME=$CODE_ROOT/install
     export PATH=$PATH:$CODE_HOME
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CODE_HOME/fmecore
     return 0
 }
 

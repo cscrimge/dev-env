@@ -36,7 +36,7 @@
     st = status
     ff = merge --ff-only
     dt = difftool -d
-    up = update
+    up = !git update && git lfs fetch upstream master && git push origin master
     pu = push -u
 
 [credential]
@@ -56,3 +56,6 @@
 	#fetchexclude = *.pdb,*.dll,*.lib,*.exe,*.msm,PLATFORM-macosx/*
 [rebase]
 	autoSquash = true
+	abbreviateCommands = true
+[lfs "https://gtb-1.safe.internal/cscrimgeour/fme.git/info/lfs"]
+	locksverify = true

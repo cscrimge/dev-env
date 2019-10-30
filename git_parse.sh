@@ -19,7 +19,8 @@ function parse_git_branch() {
 
        stat="${branch}$(fg 136 "|")$(parse_git_status)"
 
-       echo -n "${prefix}${stat}${suffix} "
+       echo "${prefix}${stat}${suffix}"
+       echo -n " "
     else
         echo -n ""
     fi
