@@ -23,6 +23,7 @@ function symlink
        echo "Backing up $dest to $backup"
        mv $dest $backup
     fi
+    echo "Linking $src to $dest"
     ln -s $src $dest
 }
 
@@ -31,6 +32,12 @@ symlink $mydir/gitconfig ~/.gitconfig ~/gitconfig.orig
 symlink $mydir/emacs ~/.emacs ~/emacs.orig
 symlink $mydir/clang-format ~/.clang-format ~/clang-format.orig
 symlink $mydir/emacs.d/custom-modes ~/.emacs.d/custom-modes ~/emacs.d/custom-modes.orig
+
+for file in $(find $mydir/config -type f); do
+	dest="~/.$(realpath --relative-to=$mydir $file)"
+	mkdir -p $(dirname $dest)
+	symlink $file $dest "$dest.orig"
+done
 
 unset mydir
 unset -f symlink
