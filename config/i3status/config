@@ -1,0 +1,47 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 5
+}
+
+order += "disk /"
+order += "ethernet enp0s31f6"
+order += "ethernet ppp0"
+#order += "run_watch VPNC"
+order += "load"
+order += "tztime local"
+
+ethernet enp0s31f6 {
+        # if you use %speed, i3status requires root privileges
+        format_up = "E: %ip"
+        format_down = "E: down"
+}
+
+ethernet ppp0 {
+        # if you use %speed, i3status requires root privileges
+        format_up = "VPN: %ip"
+        format_down = "VPN: disconnected"
+}
+
+run_watch VPNC {
+	pidfile = "/var/run/ppp0.pid"
+}
+
+tztime local {
+        format = "%a %Y-%m-%d %T"
+}
+
+load {
+        format = "%1min"
+}
+
+disk "/" {
+        format = "%free (%avail) / %total"
+}
