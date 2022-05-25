@@ -69,20 +69,21 @@
  '(tcl-indent-level 3)
  '(line-number-mode 1)
  '(column-number-mode 1))
-(custom-set-faces
+ ;; (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 88 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
- '(font-lock-builtin-face ((((class color) (min-colors 88) (background light)) (:foreground "CadetBlue" :weight bold))))
- '(font-lock-comment-delimiter-face ((default (:inherit font-lock-comment-face :weight bold)) (((class color) (min-colors 16)) nil)))
- '(font-lock-comment-face ((((class color) (min-colors 88) (background light)) (:foreground "DarkGreen"))))
- '(font-lock-constant-face ((((class color) (min-colors 88) (background light)) (:foreground "Firebrick"))))
- '(font-lock-doc-face ((t (:inherit font-lock-comment-face))))
- '(font-lock-function-name-face ((((class color) (min-colors 88) (background light)) (:foreground "CadetBlue"))))
- '(font-lock-keyword-face ((((class color) (min-colors 88) (background light)) (:foreground "Navy" :weight bold))))
- '(font-lock-negation-char-face ((t (:foreground "red"))))
- '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:foreground "Blue"))))
- '(font-lock-type-face ((((class color) (min-colors 88) (background light)) (:foreground "Purple"))))
- '(trailing-whitespace ((((class color) (background light)) (:background "pink1")))))
+  ;; '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 88 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
+  ;; '(font-lock-builtin-face ((((class color) (min-colors 88) (background light)) (:foreground "CadetBlue" :weight bold))))
+  ;; '(font-lock-comment-delimiter-face ((default (:inherit font-lock-comment-face :weight bold)) (((class color) (min-colors 16)) nil)))
+  ;; '(font-lock-comment-face ((((class color) (min-colors 88) (background light)) (:foreground "DarkGreen"))))
+  ;; '(font-lock-constant-face ((((class color) (min-colors 88) (background light)) (:foreground "Firebrick"))))
+  ;; '(font-lock-doc-face ((t (:inherit font-lock-comment-face))))
+  ;; '(font-lock-function-name-face ((((class color) (min-colors 88) (background light)) (:foreground "CadetBlue"))))
+  ;; '(font-lock-keyword-face ((((class color) (min-colors 88) (background light)) (:foreground "Navy" :weight bold))))
+  ;; '(font-lock-negation-char-face ((t (:foreground "red"))))
+  ;; '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:foreground "Blue"))))
+  ;; '(font-lock-type-face ((((class color) (min-colors 88) (background light)) (:foreground "Purple"))))
+  ;; '(trailing-whitespace ((((class color) (background light)) (:background "pink1")))))
+(load-theme 'tango-dark)

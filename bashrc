@@ -39,6 +39,7 @@ CONFIG_DIR=$(cd $(dirname $(readlink -f ${BASH_SOURCE[0]})) && pwd)
 source $CONFIG_DIR/bash-prompt.sh
 
 PS1='$(cmd_status)\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;37m\]\h\[\033[00m\]: $(parse_git_branch)\[\033[01;34m\]\w\[\033[00m\]\n[\[\033[01;35m\]\t\[\033[00m\]]$ '
+PROMPT_COMMAND='echo -ne "\033]0;Terminal: $(parse_git_repo_name) ($(parse_git_branch_name))\007"'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -89,7 +90,7 @@ if [ -d $HOME/.local/bin ]; then
     PATH=$HOME/.local/bin:$PATH; export PATH
 fi
 
-PATH=$PATH:/code/git/git-scripts/bin
+PATH=$PATH:$HOME/code/git/git-scripts/bin
 
 export PATH LD_LIBRARY_PATH LIBRARY_PATH
 
@@ -126,7 +127,7 @@ function setfme {
 	    PATH=${PATH/:$CODE_ROOT\/install/}
     fi
 
-    CODE_ROOT=$(git -C $1 rev-parse --show-toplevel 2>/dev/null)
+    export CODE_ROOT=$(git -C $1 rev-parse --show-toplevel 2>/dev/null)
 
     if [ ! -n "$CODE_ROOT" ]; then
         echo "$1 is not in a git respository"
@@ -143,6 +144,6 @@ function setfme {
     return 0
 }
 
-setfme $PWD || setfme $CODE_PARENT/working
+setfme $PWD 
 
 unset CONFIG_DIR

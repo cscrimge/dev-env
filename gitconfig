@@ -42,7 +42,7 @@
 [credential]
 	helper = cache --timeout=3600
 [init]
-	templatedir = /code/git/git-scripts/template
+	templatedir = /usr/local/git-scripts/template
 #[filter "fat"]
 #	clean = git-fat filter-clean
 #	smudge = git-fat filter-smudge

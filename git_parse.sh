@@ -7,9 +7,22 @@ function fg
 }
 
 ##################################################################
+# get the name of the git repository
+function parse_git_repo_name() {
+	echo -n "$(git rev-parse --show-toplevel 2> /dev/null | awk -F/ '{print $NF}')"
+}
+
+##################################################################
+# get current branch in git repo
+function parse_git_branch_name() {
+    local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+    echo -n "${branch}"
+}
+
+##################################################################
 # get current branch in git repo
 function parse_git_branch() {
-    local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+    local branch=$(parse_git_branch_name)
     if [ ! "${branch}" == "" ]
     then
        branch=$(fg 120 "${branch}")
