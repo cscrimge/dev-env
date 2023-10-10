@@ -42,33 +42,39 @@
 ;;                         (untabify (point-min) (point-max)))))
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(c-basic-offset 3)
- '(c-default-style (quote ((c-mode . "ellemtel") (c++-mode . "ellemtel") (java-mode . "java") (awk-mode . "awk") (other . "gnu"))))
+ '(c-default-style
+   '((c-mode . "ellemtel")
+     (c++-mode . "ellemtel")
+     (java-mode . "java")
+     (awk-mode . "awk")
+     (other . "gnu")))
+ '(column-number-mode 1)
  '(display-buffer-reuse-frames t)
- '(ediff-split-window-function (quote split-window-horizontally))
+ '(ediff-split-window-function 'split-window-horizontally)
  '(focus-follows-mouse t)
  '(global-auto-revert-mode t)
  '(hide-ifdef-shadow t)
  '(indent-tabs-mode nil)
+ '(line-number-mode 1)
  '(lisp-body-indent 3)
  '(mouse-autoselect-window t)
+ '(package-selected-packages '(use-package))
  '(perl-indent-level 3)
  '(pop-up-windows nil)
  '(require-final-newline t)
- '(scroll-bar-mode (quote right))
+ '(scroll-bar-mode 'right)
  '(sh-indentation 3)
  '(show-paren-mode t)
  '(show-trailing-whitespace t)
  '(standard-indent 3)
  '(tab-width 4)
  '(tcl-continued-indent-level 3)
- '(tcl-indent-level 3)
- '(line-number-mode 1)
- '(column-number-mode 1))
+ '(tcl-indent-level 3))
  ;; (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -87,3 +93,9 @@
   ;; '(font-lock-type-face ((((class color) (min-colors 88) (background light)) (:foreground "Purple"))))
   ;; '(trailing-whitespace ((((class color) (background light)) (:background "pink1")))))
 (load-theme 'tango-dark)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

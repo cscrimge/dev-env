@@ -34,7 +34,7 @@ symlink $mydir/clang-format ~/.clang-format ~/clang-format.orig
 symlink $mydir/emacs.d/custom-modes ~/.emacs.d/custom-modes ~/emacs.d/custom-modes.orig
 
 for file in $(find $mydir/config -type f); do
-	dest="~/.$(realpath --relative-to=$mydir $file)"
+	dest="$HOME/.$(realpath --relative-to=$mydir $file)"
 	mkdir -p $(dirname $dest)
 	symlink $file $dest "$dest.orig"
 done

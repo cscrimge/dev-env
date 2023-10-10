@@ -81,6 +81,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+. ~/.bash_completion.d/python-argcomplete.sh
+
 ### Personal Customization starts here
 
 if [ -d $HOME/bin ]; then
@@ -90,15 +92,17 @@ if [ -d $HOME/.local/bin ]; then
     PATH=$HOME/.local/bin:$PATH; export PATH
 fi
 
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+
 PATH=$PATH:$HOME/code/git/git-scripts/bin
 
 export PATH LD_LIBRARY_PATH LIBRARY_PATH
 
-export EDITOR=vim
+export EDITOR=nvim
 
 export CDPATH=.:$HOME
 
-export CODE_PARENT=$HOME/code/git/fme
+export CODE_PARENT=$HOME/code/git/fme.git
 
 function choosefme {
     if [ ! -n "$CODE_PARENT" ]; then
@@ -137,10 +141,10 @@ function setfme {
     echo "New CODE_ROOT is $CODE_ROOT"
 
     CDPATH=.:$HOME:$CODE_ROOT
+    alias cd='HOME=$CODE_ROOT cd'
 
     export CODE_HOME=$CODE_ROOT/install
     export PATH=$PATH:$CODE_HOME
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CODE_HOME/fmecore
     return 0
 }
 
