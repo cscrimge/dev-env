@@ -14,7 +14,7 @@
 
 [push]
     default = current
-	autoSetupRemote = true
+    autoSetupRemote = true
 
 [merge]
     tool = meld
@@ -31,7 +31,7 @@
     email = chris.scrimgeour@safe.com
 
 [alias]
-    lg = log --color --decorate --abbrev-commit --graph
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     purge = clean -d -x -e scons.cfg
     pick = cherry-pick
     st = status
@@ -39,6 +39,7 @@
     dt = difftool -d
     up = !git update && git lfs fetch upstream master && git push origin master
     pu = push -u
+	br = branch --sort=committerdate --format='(%(color:green)%(committerdate:relative)%(color:reset)) %(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject)'
 
 [credential]
 	helper = cache --timeout=3600
@@ -60,5 +61,3 @@
 	abbreviateCommands = true
 [lfs "https://gtb-1.safe.internal/cscrimgeour/fme.git/info/lfs"]
 	locksverify = true
-[submodule]
-	recurse = true
